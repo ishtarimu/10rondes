@@ -1,0 +1,64 @@
+<head>
+  <title>10rondes : processeur de cadavres exquis</title>
+</head>
+
+<body>
+	<div class="header">
+		<h1>10 rondes : processeur de cadavres exquis</h1>
+	</div>
+	<div class="main">
+		<div class="texte">
+			{{#each displayTexte}}
+				{{ value }}
+			{{/each}}
+			...
+			{{#each loop nbOfRondes}}
+				<span class="ronde">RONDE {{this.value}}</span>
+			{{/each}}
+			...{{lastOfTheLastWord}}
+		</div>
+		{{>participate}}
+	</div>
+	
+	<div class="hide" id="manual">
+		 <strong>Cadavre exquis</strong> : jeu qui consiste à faire composer une phrase, ou un dessin, par plusieurs personnes sans qu'aucune d'elles ne puisse tenir compte de la collaboration ou des collaborations précédentes.
+		 <p>Tout le monde peut participer.</p>
+		 <p>Lorsque quelqu'un écrit les participations sont bloquées.</p>
+		 <p>10 participations sont cachées.</p>
+		 <p>Vous avez donc accès au début du texte (s'il y a plus de 10 participations) et au dernier mot de la dernière participation.</p>
+		 <p>Il n'y a pas de fin.</p>
+	</div>
+	<div class="hide" id="mail">
+		contact : <br> <img src="mail.svg">
+	</div>
+	<div 	class="info ronde mail"
+			onmouseover="document.getElementById('mail').style.display = 'block';"
+			onmouseout="document.getElementById('mail').style.display = 'none';">
+			@
+	</div>
+	<div 	class="info ronde" 
+			onmouseover="document.getElementById('manual').style.display = 'block';"
+			onmouseout="document.getElementById('manual').style.display = 'none';">
+			?
+	</div>
+	<div 	class="info ronde fork">
+		&#x2442;
+	</div>
+	
+</body>
+
+<template name="participate">
+<div>
+
+<form>
+	{{#if editionBlocked}}
+		<div class="ronde block">Quelqu'un est en train d'écrire la suite.</div>
+	{{else}}
+		<textarea class="participate-area" type="text" name="pTexte" rows="10"></textarea>
+		<br>
+		{{#if isMine}} vous avez 10 minutes pour envoyer votre texte. {{/if}}
+		<input class="envoyer" type="submit" value="Envoyer">
+	{{/if}}
+</form>
+</div>
+</template>
